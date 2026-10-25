@@ -1,0 +1,6 @@
+# `mise install`, then `bun install` (prepare adds lefthook hooks). CI installs
+# the same pins (voidflow's tool-ci runs mise-action). Renovate bumps these.
+[tools]
+bun = "1.4.4"
+lefthook = "2.2.1"
+shellcheck = "0.11.0"
