@@ -1,0 +1,29 @@
+{
+    "name": "txv-sh",
+    "version": "0.1.0",
+    "description": "txv.sh: short links and attested install scripts on Cloudflare Workers",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "wrangler dev",
+        "deploy": "wrangler deploy",
+        "check": "tsc --noEmit",
+        "lint": "biome check . && bun run lint:sh",
+        "lint:sh": "shellcheck sh/*.sh",
+        "format": "biome check --write .",
+        "test": "bun test",
+        "test:unit": "bun test",
+        "db:migrate:local": "wrangler d1 migrations apply txv-sh --local",
+        "db:migrate:prod": "wrangler d1 migrations apply txv-sh --remote",
+        "links": "bun scripts/links.ts",
+        "prepare": "lefthook install || echo 'lefthook not installed (run mise install); git hooks skipped'",
+        "test:push": "bun run lint && bun run check && bun test"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "2.5.15",
+        "@cloudflare/workers-types": "^5.20261006.1",
+        "@types/bun": "^1.4.2",
+        "typescript": "^5.9.3",
+        "wrangler": "^4.147.0"
+    }
+}

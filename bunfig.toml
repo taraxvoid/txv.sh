@@ -1,0 +1,11 @@
+[install]
+minimumReleaseAge = 259200 # 3 days
+minimumReleaseAgeExcludes = ["@types/bun", "bun-types", "@cloudflare/workers-types"]
+
+[test]
+root = "test"
+
+# Install scripts are imported as text, as wrangler.jsonc's rules do for the
+# Worker bundle, so tests see the exact bytes the Worker serves.
+[loader]
+".sh" = "text"

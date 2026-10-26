@@ -1,0 +1,93 @@
+name: CI
+
+# Validate every change; deploy main to production. Before deploying, attest
+# sh/*.sh so anyone can check a downloaded script came from this workflow:
+# `gh attestation verify <file> --repo taraxvoid/txv.sh`, or txv.sh/verify.
+# sh/verify.sh pins this file's path as the signer, so keep the attest step
+# in ci.yml.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    uses: taraxvoid/voidflow/.github/workflows/tool-ci.yml@5693c9455d52f7fa419ff4be747c218bac3814f8 # v0.16.0
+    permissions:
+      contents: read
+      pull-requests: read
+
+  deploy:
+    name: Deploy [prod]
+    needs: validate
+    # Never from a fork or a PR: an attestation from this job means "reviewed
+    # and on main".
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.CLOUDFLARE_ACCOUNT_ID != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: prod
+    concurrency:
+      group: deploy-prod
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      id-token: write # sign the attestation (Sigstore)
+      attestations: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: jdx/mise-action@2d8d4cafcbd33be2ea37d2b6f5ad595363d1f1ca # v5.1.1
+
+      - run: bun install --frozen-lockfile
+
+      # Before the deploy, so no script is ever served without one.
+      - name: Attest scripts
+        uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4.2.2
+        with:
+          subject-path: sh/*.sh
+
+      - uses: taraxvoid/voidflow/actions/cloudflare-deploy@5693c9455d52f7fa419ff4be747c218bac3814f8 # v0.16.0
+        with:
+          env: prod
+          cloudflare-api-token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          cloudflare-account-id: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
+          migrate-d1: 'true'
+
+      # What's live must be what was attested: fetch every script, compare it
+      # with the checkout, and verify the attestation the way a user would.
+      - name: Smoke test
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          curl -fsS --retry 5 --retry-all-errors --retry-delay 10 https://txv.sh/_health
+          mkdir -p "$RUNNER_TEMP/live"
+          for file in sh/*.sh; do
+            name=$(basename "$file" .sh)
+            live="$RUNNER_TEMP/live/$name.sh"
+            ok=false
+            for _ in 1 2 3 4 5; do
+              if curl -fsS "https://txv.sh/$name" -o "$live" && cmp -s "$file" "$live"; then
+                ok=true
+                break
+              fi
+              sleep 10
+            done
+            if [ "$ok" != true ]; then
+              echo "::error::txv.sh/$name does not match $file"
+              exit 1
+            fi
+            gh attestation verify "$live" --repo "$REPO" \
+              --source-ref refs/heads/main \
+              --signer-workflow "$REPO/.github/workflows/ci.yml" \
+              --deny-self-hosted-runners
+          done
