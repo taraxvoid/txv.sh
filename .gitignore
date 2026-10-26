@@ -1,4 +1,27 @@
 node_modules/
+
+# Wrangler / Cloudflare
 .wrangler/
-.dev.vars
+.dev.vars*
+!.dev.vars.example
+worker-configuration.d.ts
+
+# Env
 .env
+.env.*
+!.env.example
+
+# Editors / agents
+.claude/
+.cursor
+.vscode/
+.idea
+.kilo/
+.poolside/
+.superpowers
+docs/superpowers
+.playwright-mcp
+
+# OS
+.DS_Store
+Thumbs.db
