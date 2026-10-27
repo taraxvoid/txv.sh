@@ -43,7 +43,7 @@ export function notFoundHtml(homeUrl: string): string {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="refresh" content="5;url=${home}">
-<title>Link not found · ${HOST}</title>
+<title>Link not found - ${HOST}</title>
 <style>
   :root { color-scheme: light dark; }
   body { margin: 0; min-height: 100vh; display: grid; place-items: center;
