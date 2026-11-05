@@ -21,7 +21,9 @@ open https://txv.sh/<slug>                   # a short link
 
 A script wins over a link with the same name, and is served from the bundle,
 so scripts keep working if D1 is down. Unknown paths get an HTML page in a
-browser, and otherwise a body that fails loudly if it gets piped to `sh`.
+browser, and otherwise a body that fails loudly if it gets piped to `sh`. The
+`curl` index is who this is plus script usage, written entirely as `#`
+comments, so piping it to `sh` does nothing.
 
 ## Scripts and attestations
 

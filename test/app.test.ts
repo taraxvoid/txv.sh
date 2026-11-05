@@ -161,6 +161,20 @@ describe('root and misc', () => {
         expect(text).toContain('verify')
         expect(text).toContain('gh attestation verify')
     })
+    test('the index is Tara, and a no-op when piped to sh', async () => {
+        const text = await (await get('/', { accept: '*/*' })).text()
+        expect(text).toContain('github.com/taraxvoid')
+        expect(text).toContain('linkedin.com/in/taraxvoid')
+        const lines = text.trimEnd().split('\n')
+        for (const line of lines) {
+            expect(line.startsWith('#')).toBe(true)
+            expect(line.length).toBeLessThanOrEqual(80)
+            expect(line).toMatch(/^[\x20-\x7e]*$/)
+        }
+        const sh = Bun.spawnSync(['sh'], { stdin: Buffer.from(text) })
+        expect(sh.exitCode).toBe(0)
+        expect(sh.stdout.toString()).toBe('')
+    })
     test('health', async () => {
         expect(await (await get('/_health')).json()).toEqual({ ok: true })
     })
