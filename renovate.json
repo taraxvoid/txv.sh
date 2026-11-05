@@ -1,4 +1,14 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "extends": ["github>taraxvoid/voidflow"]
+    "extends": ["github>taraxvoid/voidflow"],
+    "customManagers": [
+        {
+            "description": "Versions pinned in sh/*.sh: a `# renovate: datasource=... depName=...` comment, then name=version on the next line",
+            "customType": "regex",
+            "managerFilePatterns": ["/^sh/[^/]+\\.sh$/"],
+            "matchStrings": [
+                "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\s+\\w+=(?<currentValue>\\S+)"
+            ]
+        }
+    ]
 }
