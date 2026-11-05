@@ -1,10 +1,14 @@
 import verify from '../sh/verify.sh'
+import voidflow from '../sh/voidflow.sh'
 
 /**
  * Every file in sh/, by name (`sh/<name>.sh` is served at `/<name>`).
  * test/scripts.test.ts fails if one is missing here.
  */
-export const SCRIPTS: Readonly<Record<string, string>> = { verify }
+export const SCRIPTS: Readonly<Record<string, string>> = {
+    verify,
+    voidflow,
+}
 
 /** The first comment line after the shebang: the script's one-line summary. */
 export function summary(text: string): string {

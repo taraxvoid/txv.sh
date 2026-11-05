@@ -1,5 +1,5 @@
 #!/bin/sh
-# Download a txv.sh script, check its GitHub attestation, then run it
+# Download a txv.sh script, check its attestation, then run it
 #
 #   curl -fsSL txv.sh/verify | sh -s -- <name> [args...]
 #

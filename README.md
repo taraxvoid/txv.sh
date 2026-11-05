@@ -6,6 +6,7 @@ Workers and D1.
 ```sh
 curl txv.sh                                  # what's here
 curl -fsSL txv.sh/verify | sh -s -- <name>   # check a script's attestation, then run it
+curl -fsSL txv.sh/voidflow | sh -s -- init --kind tool   # set up a new repo
 open https://txv.sh/<slug>                   # a short link
 ```
 
@@ -43,6 +44,15 @@ gh attestation verify <name>.sh --repo taraxvoid/txv.sh \
 have it, and otherwise `mise x gh`, so [mise](https://mise.jdx.dev) alone is
 enough. `gh` needs to be signed in. `verify` can't check itself, so read it
 first (it's short), or verify it by hand once.
+
+`txv.sh/voidflow` runs [voidflow](https://github.com/taraxvoid/voidflow)'s
+CLI at the version pinned in `sh/voidflow.sh`. It downloads that tarball from
+npm, checks its attestation from voidflow's release workflow, then runs the
+same bytes with `bun`, so nothing unchecked runs and nothing is installed. Like
+`verify`, it falls back to `mise x` for `bun` and `gh`, and `gh` needs to be
+signed in. Renovate bumps the pin (the `customManagers` entry in
+`renovate.json` reads the `# renovate:` comment above it), so each voidflow
+release is a reviewed PR here.
 
 To add a script, put `sh/<name>.sh` in place (with a `#!/bin/sh` line, then a
 `# ` summary line, which `curl txv.sh` lists) and register it in
