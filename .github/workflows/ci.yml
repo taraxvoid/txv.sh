@@ -69,7 +69,11 @@ jobs:
                   GH_TOKEN: ${{ github.token }}
                   REPO: ${{ github.repository }}
               run: |
-                  curl -fsS --retry 5 --retry-all-errors --retry-delay 10 https://txv.sh/_health
+                  if ! curl -fsS --retry 5 --retry-all-errors --retry-delay 10 https://txv.sh/_health; then
+                    # Show what the edge answered with (who blocked us?).
+                    curl -sS -D - https://txv.sh/_health | head -c 2000 || true
+                    exit 1
+                  fi
                   mkdir -p "$RUNNER_TEMP/live"
                   for file in sh/*.sh; do
                     name=$(basename "$file" .sh)
