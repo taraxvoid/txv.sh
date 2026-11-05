@@ -11,13 +11,13 @@ open https://txv.sh/<slug>                   # a short link
 
 ## Routes
 
-| Path | What |
-| --- | --- |
-| `/` | Browsers go to taraxvoid.com; `curl` gets a plain-text index |
-| `/<name>`, `/<name>.sh` | `sh/<name>.sh`, as text, with an `x-content-sha256` header |
-| `/<name>.sha256` | Checksum in `sha256sum -c` format |
-| `/<slug>` | 302 to the link stored in D1 (case-insensitive, trailing `/` ok) |
-| `/_health` | `{ "ok": true }` when D1 answers |
+| Path                    | What                                                             |
+| ----------------------- | ---------------------------------------------------------------- |
+| `/`                     | Browsers go to taraxvoid.com; `curl` gets a plain-text index     |
+| `/<name>`, `/<name>.sh` | `sh/<name>.sh`, as text, with an `x-content-sha256` header       |
+| `/<name>.sha256`        | Checksum in `sha256sum -c` format                                |
+| `/<slug>`               | 302 to the link stored in D1 (case-insensitive, trailing `/` ok) |
+| `/_health`              | `{ "ok": true }` when D1 answers                                 |
 
 A script wins over a link with the same name, and is served from the bundle,
 so scripts keep working if D1 is down. Unknown paths get an HTML page in a

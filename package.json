@@ -20,7 +20,7 @@
         "test:push": "bun run lint && bun run check && bun test"
     },
     "devDependencies": {
-        "@biomejs/biome": "2.5.15",
+        "@biomejs/biome": "^2.6.4",
         "@cloudflare/workers-types": "^5.20261006.1",
         "@types/bun": "^1.4.2",
         "typescript": "^5.9.3",
