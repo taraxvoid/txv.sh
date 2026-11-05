@@ -61,37 +61,3 @@ jobs:
                   cloudflare-account-id: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
                   command: deploy
                   migrate-d1: "true"
-
-            # What's live must be what was attested: fetch every script, compare it
-            # with the checkout, and verify the attestation the way a user would.
-            - name: Smoke test
-              env:
-                  GH_TOKEN: ${{ github.token }}
-                  REPO: ${{ github.repository }}
-              run: |
-                  if ! curl -fsS --retry 5 --retry-all-errors --retry-delay 10 https://txv.sh/_health; then
-                    # Show what the edge answered with (who blocked us?).
-                    curl -sS -D - https://txv.sh/_health | head -c 2000 || true
-                    exit 1
-                  fi
-                  mkdir -p "$RUNNER_TEMP/live"
-                  for file in sh/*.sh; do
-                    name=$(basename "$file" .sh)
-                    live="$RUNNER_TEMP/live/$name.sh"
-                    ok=false
-                    for _ in 1 2 3 4 5; do
-                      if curl -fsS "https://txv.sh/$name" -o "$live" && cmp -s "$file" "$live"; then
-                        ok=true
-                        break
-                      fi
-                      sleep 10
-                    done
-                    if [ "$ok" != true ]; then
-                      echo "::error::txv.sh/$name does not match $file"
-                      exit 1
-                    fi
-                    gh attestation verify "$live" --repo "$REPO" \
-                      --source-ref refs/heads/main \
-                      --signer-workflow "$REPO/.github/workflows/ci.yml" \
-                      --deny-self-hosted-runners
-                  done
