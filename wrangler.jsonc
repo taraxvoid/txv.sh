@@ -4,20 +4,34 @@
     "main": "src/index.ts",
     "compatibility_date": "2026-09-01",
     "workers_dev": false,
-    "observability": { "enabled": true },
+    "observability": {
+        "enabled": true
+    },
     // Install scripts are bundled as text, byte for byte, so what the Worker
     // serves hashes to what CI attested. bunfig.toml's loader does the same
     // for tests.
-    "rules": [{ "type": "Text", "globs": ["**/*.sh"], "fallthrough": true }],
+    "rules": [
+        {
+            "type": "Text",
+            "globs": ["**/*.sh"],
+            "fallthrough": true
+        }
+    ],
     // Provisioned on first deploy (no id needed); CI applies migrations.
     "d1_databases": [
         {
             "binding": "DB",
             "database_name": "txv-sh",
-            "migrations_dir": "migrations"
+            "migrations_dir": "migrations",
+            "database_id": "821e3073-2875-4b65-b1b0-083862f08a67"
         }
     ],
-    "routes": [{ "pattern": "txv.sh", "custom_domain": true }],
+    "routes": [
+        {
+            "pattern": "txv.sh",
+            "custom_domain": true
+        }
+    ],
     // POSTHOG_KEY is a Worker secret: `wrangler secret put POSTHOG_KEY`.
     // Without it redirects still work and nothing is sent.
     "vars": {
