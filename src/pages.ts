@@ -1,6 +1,30 @@
 import { HOST, REPO } from './config'
 import { SCRIPTS, summary } from './scripts'
 
+/** Shown above the script usage. Plain ASCII, one screen. */
+const ABOUT = `Tara X Void
+Platform, DevEx and security engineer. Omaha, NE.
+
+I keep the good bots in and the bad bots out: CI/CD pipelines, supply-chain
+security and coding-agent guardrails. Founder of RavenFlight Industries.
+Before that Lindsay, Datadog, Salesforce, Yahoo, Tile and MITRE.
+
+  web       https://taraxvoid.com
+  github    https://github.com/taraxvoid
+  linkedin  https://linkedin.com/in/taraxvoid`
+
+/**
+ * Prefix every line with `# ` so the whole body is a shell comment:
+ * `curl txv.sh | sh` does nothing instead of running prose.
+ */
+function asComments(text: string): string {
+    return `${text
+        .trimEnd()
+        .split('\n')
+        .map((line) => (line ? `# ${line}` : '#'))
+        .join('\n')}\n`
+}
+
 /** What `curl txv.sh` prints. */
 export function indexText(): string {
     const names = Object.keys(SCRIPTS).sort()
@@ -8,7 +32,9 @@ export function indexText(): string {
     const list = names
         .map((n) => `  ${n.padEnd(width)}  ${summary(SCRIPTS[n] ?? '')}`)
         .join('\n')
-    return `${HOST}: short links and install scripts by Tara X Void
+    return asComments(`${ABOUT}
+
+${HOST}: short links and install scripts
 
 Scripts (source: https://github.com/${REPO}/tree/main/sh):
 ${list}
@@ -22,8 +48,7 @@ Or by hand:
   gh attestation verify <name>.sh --repo ${REPO}
   sh <name>.sh
 
-Checksums: ${HOST}/<name>.sha256
-`
+Checksums: ${HOST}/<name>.sha256`)
 }
 
 /**
