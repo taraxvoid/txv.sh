@@ -14,7 +14,7 @@ open https://txv.sh/<slug>                   # a short link
 
 | Path                    | What                                                             |
 | ----------------------- | ---------------------------------------------------------------- |
-| `/`                     | Browsers go to taraxvoid.com; `curl` gets a plain-text index     |
+| `/`                     | Browsers go to taraxvoid.net/resume; `curl` gets a text index    |
 | `/<name>`, `/<name>.sh` | `sh/<name>.sh`, as text, with an `x-content-sha256` header       |
 | `/<name>.sha256`        | Checksum in `sha256sum -c` format                                |
 | `/<slug>`               | 302 to the link stored in D1 (case-insensitive, trailing `/` ok) |
@@ -121,3 +121,10 @@ a shell:
   Cloudflare token a GitHub secret, and links are in D1.
 - Report a security problem with a script privately; see
   [SECURITY.md](SECURITY.md).
+
+## License
+
+Code is [MIT](LICENSE). The one exception is the personal text in
+`src/pages.ts` (the `ABOUT` block: name, bio and profile links) and the
+`HOME_URL` and `UTM_HOSTS` values in `wrangler.jsonc`. Those identify a person
+and are not licensed for reuse, so replace them if you fork this.
