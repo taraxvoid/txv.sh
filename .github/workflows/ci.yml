@@ -55,7 +55,7 @@ jobs:
 
             # Logs counts only: destinations never reach this public log.
             - name: Build links
-              uses: taraxvoid/voidlink/actions/build-links@128c0e7a40f3ec09ec4f7f37c241c78d81aa04ef # unreleased: pin to a voidlink release
+              uses: taraxvoid/voidlink/actions/build-links@336be623f32701d4899a1ddae8c4618a41268b42 # unreleased: pin to a voidlink release
               with:
                   redirects-repo: taraxvoid/infra
                   app-client-id: ${{ vars.LINKS_BOT_CLIENT_ID }}
