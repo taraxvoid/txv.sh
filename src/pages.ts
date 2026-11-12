@@ -1,14 +1,16 @@
 import { HOST, REPO } from './config'
 import { SCRIPTS, summary } from './scripts'
 
-/** Shown above the script usage. Plain ASCII, one screen. */
+/**
+ * Shown above the script usage. Plain ASCII, one screen. Personal text, not
+ * covered by the MIT license (see README); forks should replace it.
+ */
 const ABOUT = `Tara X Void
 Platform, DevEx and security engineer. Omaha, NE.
+CI/CD, supply-chain security and coding-agent guardrails. Founder of
+RavenFlight Industries.
 
-I keep the good bots in and the bad bots out: CI/CD pipelines, supply-chain
-security and coding-agent guardrails. Founder of RavenFlight Industries.
-Before that Lindsay, Datadog, Salesforce, Yahoo, Tile and MITRE.
-
+  resume    https://taraxvoid.net/resume
   web       https://taraxvoid.com
   github    https://github.com/taraxvoid
   linkedin  https://linkedin.com/in/taraxvoid`

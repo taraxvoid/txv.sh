@@ -3,6 +3,7 @@
     "version": "0.1.0",
     "description": "txv.sh: short links and attested install scripts on Cloudflare Workers",
     "private": true,
+    "license": "MIT",
     "type": "module",
     "scripts": {
         "dev": "wrangler dev",
