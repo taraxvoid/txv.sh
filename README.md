@@ -124,9 +124,8 @@ a shell:
 
 ## License
 
-Code is [MIT](LICENSE). The one exception is the personal text in
-`src/pages.ts` (the `ABOUT` block: name, bio and profile links) and the
-`HOME_URL` and `UTM_HOSTS` values in `wrangler.jsonc`. Those identify a person
-and are not licensed for reuse, so replace them if you fork this; see
-[NOTICE](NOTICE). The notice lives in its own file so `LICENSE` stays the
-unmodified MIT text that license scanners recognize.
+Code is [MIT](LICENSE). My content is excluded and all rights reserved: the
+`ABOUT` block in `src/pages.ts` and the `HOME_URL` and `UTM_HOSTS` values in
+`wrangler.jsonc`. It identifies a person, so replace it if you fork this. See
+[NOTICE](NOTICE), which is separate so `LICENSE` stays the unmodified MIT text
+that license scanners recognize.
