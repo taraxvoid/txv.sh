@@ -41,18 +41,31 @@ function d1(sql: string): Record<string, unknown>[] {
     return result.results
 }
 
-const quote = (s: unknown) => `'${String(s).replace(/[\\']/g, '\\$&')}'`
+// JSON string literals are valid TypeScript, with newlines and quotes escaped.
+const quote = (s: unknown) => JSON.stringify(String(s))
+
+const hasTable = (name: string) =>
+    d1(`SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = '${name}'`)
+        .length > 0
 
 switch (command) {
     case 'ls': {
-        const rows = d1(
-            'SELECT slug, click_count, last_clicked_at FROM voidlink_clicks ORDER BY click_count DESC, slug',
-        )
+        // voidlink creates its table on the first counted click.
+        const rows = hasTable('voidlink_clicks')
+            ? d1(
+                  'SELECT slug, click_count, last_clicked_at FROM voidlink_clicks ORDER BY click_count DESC, slug',
+              )
+            : []
         if (!rows.length) console.log('no clicks yet')
         else console.table(rows)
         break
     }
     case 'export': {
+        if (!hasTable('links')) {
+            fail(
+                'no pre-voidlink `links` table in this database: nothing to export',
+            )
+        }
         const rows = d1(
             'SELECT slug, destination_url, note FROM links ORDER BY slug',
         )
