@@ -1,8 +1,10 @@
 The MIT license in LICENSE covers the code in this repository.
 
-It does not cover the personal text and values that identify Tara X Void:
+## My content
+
+My content is not covered by that license and is all rights reserved:
 
 - the ABOUT block in src/pages.ts (name, bio, profile links)
 - HOME_URL and UTM_HOSTS in wrangler.jsonc
 
-Those are all rights reserved. If you fork this repo, replace them.
+It identifies me. If you fork this repo, replace it with your own.
