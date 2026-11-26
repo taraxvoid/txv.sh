@@ -2,6 +2,6 @@
 # test:push). Pin to a release tag; Renovate bumps it.
 remotes:
     - git_url: https://github.com/taraxvoid/voidflow
-      ref: v0.16.0
+      ref: v1.5.0
       configs:
           - lefthook/base.yml
