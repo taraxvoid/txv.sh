@@ -1,6 +1,6 @@
 [install]
 minimumReleaseAge = 259200 # 3 days
-minimumReleaseAgeExcludes = ["@types/bun", "bun-types", "@cloudflare/workers-types"]
+minimumReleaseAgeExcludes = ["@taraxvoid/voidflow", "@types/bun", "bun-types", "@cloudflare/workers-types"]
 
 [test]
 root = "test"
