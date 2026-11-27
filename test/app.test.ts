@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, test } from 'bun:test'
-import { buildLinks, handle } from '@taraxvoid/voidlink'
+import { buildLinks, handle, writeLinks } from '@taraxvoid/voidlink'
 import type { Env } from '../src/config'
 import { routes } from '../src/routes'
 import { SCRIPTS, sha256 } from '../src/scripts'
@@ -28,12 +28,13 @@ let pending: Promise<unknown>[]
 let posted: Array<{ event: string; properties: Record<string, unknown> }>
 const realFetch = globalThis.fetch
 
-beforeEach(() => {
+beforeEach(async () => {
     env = {
         DB: testD1(),
         POSTHOG_KEY: 'phc_test',
         POSTHOG_HOST: 'https://ph.test',
     }
+    await writeLinks(env.DB, site.host, { version: 1, sha: 'test', links })
     pending = []
     posted = []
     globalThis.fetch = (async (_url: string, init?: RequestInit) => {
@@ -51,7 +52,7 @@ async function get(
     method = 'GET',
 ) {
     const res = await handle(
-        { site, links, routes: routes(links) },
+        { site, routes },
         new Request(`https://txv.sh${path}`, { method, headers }),
         env,
         { waitUntil: (p) => pending.push(p) },
@@ -194,8 +195,13 @@ describe('root and misc', () => {
             },
             site,
         )
+        await writeLinks(env.DB, site.host, {
+            version: 2,
+            sha: 'long',
+            links: long,
+        })
         const res = await handle(
-            { site, links: long, routes: routes(long) },
+            { site, routes },
             new Request('https://txv.sh/'),
             env,
             { waitUntil() {} },

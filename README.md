@@ -113,7 +113,7 @@ the visit.
 ```sh
 mise install    # bun, lefthook, shellcheck
 bun install
-bun run dev     # with no links: `bun run links:empty` writes links.gen.json
+bun run dev
 bun run test:push
 ```
 

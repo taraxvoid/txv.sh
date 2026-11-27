@@ -6,7 +6,7 @@
     "license": "MIT",
     "type": "module",
     "scripts": {
-        "dev": "bun run links:empty-if-missing && wrangler dev",
+        "dev": "wrangler dev",
         "deploy": "wrangler deploy",
         "check": "tsc --noEmit",
         "lint": "biome check . && bun run lint:sh",
@@ -17,12 +17,10 @@
         "links": "bun scripts/links.ts",
         "prepare": "lefthook install || echo 'lefthook not installed (run mise install); git hooks skipped'",
         "test:push": "bun run lint && bun run check && bun test",
-        "links:empty": "voidlink build --empty --site voidlink.config.ts --out links.gen.json",
-        "links:empty-if-missing": "test -f links.gen.json || bun run links:empty",
         "check:voidflow": "voidflow check"
     },
     "dependencies": {
-        "@taraxvoid/voidlink": "0.1.0"
+        "@taraxvoid/voidlink": "1.0.0"
     },
     "devDependencies": {
         "@biomejs/biome": "^2.6.4",

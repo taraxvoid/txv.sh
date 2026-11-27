@@ -17,11 +17,6 @@
             "fallthrough": true
         }
     ],
-    // The links, built by `voidlink build` from taraxvoid/infra's
-    // redirects.ts (CI) or empty (`bun run links:empty`). See src/links.d.ts.
-    "alias": {
-        "voidlink:links": "./links.gen.json"
-    },
     // Click counts only. voidlink creates its tables through this binding,
     // so the deploy runs no migrations and its token needs no D1 grant.
     "d1_databases": [

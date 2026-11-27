@@ -27,4 +27,3 @@ docs/superpowers
 Thumbs.db
 
 # voidlink build output: links from taraxvoid/infra, never committed
-links.gen.json
