@@ -1,13 +1,7 @@
-export interface Env {
-    DB: D1Database
-    /** PostHog project key, a Worker secret. Unset: no analytics. */
-    POSTHOG_KEY?: string
-    POSTHOG_HOST: string
-    /** Where `/` and unknown links send browsers. */
-    HOME_URL: string
-    /** Destination hosts (and their subdomains) that get default utm_ tags. */
-    UTM_HOSTS: string[]
-}
+import type { Env as LinkEnv } from '@taraxvoid/voidlink'
+
+/** DB (click counts), POSTHOG_KEY (a Worker secret) and POSTHOG_HOST. */
+export interface Env extends LinkEnv {}
 
 export const HOST = 'txv.sh'
 export const REPO = 'taraxvoid/txv.sh'

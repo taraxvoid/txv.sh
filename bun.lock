@@ -4,6 +4,9 @@
   "workspaces": {
     "": {
       "name": "txv-sh",
+      "dependencies": {
+        "@taraxvoid/voidlink": "1.0.0",
+      },
       "devDependencies": {
         "@biomejs/biome": "^2.6.4",
         "@cloudflare/workers-types": "^5.20261006.1",
@@ -226,6 +229,8 @@
     "@speed-highlight/core": ["@speed-highlight/core@1.2.24", "", {}, "sha512-qeW2e1l78afw8VhRPfPQ1Gjj+KU5XFQ/OFV5ti6eTa9bruO7mJyZtA4vw0ofqmA3tKCkROE9xLk3VZoeRc98nw=="],
 
     "@taraxvoid/voidflow": ["@taraxvoid/voidflow@1.5.0", "", { "dependencies": { "jsonc-parser": "3.3.1", "license-checker-rseidelsohn": "5.0.1", "smol-toml": "1.9.1" }, "peerDependencies": { "@playwright/test": ">=1.40" }, "optionalPeers": ["@playwright/test"], "bin": { "voidflow": "dist/scripts/cli.js", "deps-signals": "scripts/deps-signals.ts", "check-licenses": "scripts/check-licenses.ts", "unlighthouse-runner": "scripts/unlighthouse/run.ts" } }, "sha512-BbdnNFtDM3ycJ2u+eiXwzGqn1QmFJuVayuMjHbCNC9LMWgNVGoDMlNrpcEICwNwJZhmAUcblCMYL1q/eIN2uGg=="],
+
+    "@taraxvoid/voidlink": ["@taraxvoid/voidlink@1.0.0", "", { "bin": { "voidlink": "src/cli.ts" } }, "sha512-doFtfS9x0pwTAJDFGFNVPNL8LWs1uEcWvTG/3NZE7c6yVw1TZKuG7L+YE15y0P06eHdhBC78n0VpzH97gT38Qw=="],
 
     "@tufjs/canonical-json": ["@tufjs/canonical-json@2.0.0", "", {}, "sha512-yVtV8zsdo8qFHe+/3kw81dSLyF7D576A5cCFCi4X7B39tWT7SekaEFUnvnWJHz+9qO7qJTah1JbrDjWKqFtdWA=="],
 

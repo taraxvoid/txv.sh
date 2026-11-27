@@ -1,13 +1,6 @@
-import { handle } from './app'
+import { createWorker } from '@taraxvoid/voidlink'
+import site from '../voidlink.config'
 import type { Env } from './config'
+import { routes } from './routes'
 
-export default {
-    async fetch(req, env, ctx) {
-        try {
-            return await handle(req, env, ctx)
-        } catch (err) {
-            console.error(err)
-            return new Response('internal error\n', { status: 500 })
-        }
-    },
-} satisfies ExportedHandler<Env>
+export default createWorker<Env>({ site, routes })
