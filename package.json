@@ -18,11 +18,13 @@
         "db:migrate:prod": "wrangler d1 migrations apply txv-sh --remote",
         "links": "bun scripts/links.ts",
         "prepare": "lefthook install || echo 'lefthook not installed (run mise install); git hooks skipped'",
-        "test:push": "bun run lint && bun run check && bun test"
+        "test:push": "bun run lint && bun run check && bun test",
+        "check:voidflow": "voidflow check"
     },
     "devDependencies": {
         "@biomejs/biome": "^2.6.4",
         "@cloudflare/workers-types": "^5.20261006.1",
+        "@taraxvoid/voidflow": "^1.5.0",
         "@types/bun": "^1.4.2",
         "typescript": "^5.9.3",
         "wrangler": "^4.147.0"
