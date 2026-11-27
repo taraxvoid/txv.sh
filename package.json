@@ -3,6 +3,7 @@
     "version": "0.1.0",
     "description": "txv.sh: short links (voidlink) and attested install scripts on Cloudflare Workers",
     "private": true,
+    "license": "MIT",
     "type": "module",
     "scripts": {
         "dev": "bun run links:empty-if-missing && wrangler dev",
@@ -17,7 +18,8 @@
         "prepare": "lefthook install || echo 'lefthook not installed (run mise install); git hooks skipped'",
         "test:push": "bun run lint && bun run check && bun test",
         "links:empty": "voidlink build --empty --site voidlink.config.ts --out links.gen.json",
-        "links:empty-if-missing": "test -f links.gen.json || bun run links:empty"
+        "links:empty-if-missing": "test -f links.gen.json || bun run links:empty",
+        "check:voidflow": "voidflow check"
     },
     "dependencies": {
         "@taraxvoid/voidlink": "0.1.0"
@@ -25,6 +27,7 @@
     "devDependencies": {
         "@biomejs/biome": "^2.6.4",
         "@cloudflare/workers-types": "^5.20261006.1",
+        "@taraxvoid/voidflow": "^1.5.0",
         "@types/bun": "^1.4.2",
         "typescript": "^5.9.3",
         "wrangler": "^4.147.0"

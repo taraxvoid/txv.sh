@@ -28,6 +28,7 @@
         {
             "binding": "DB",
             "database_name": "txv-sh",
+            "migrations_dir": "migrations",
             "database_id": "821e3073-2875-4b65-b1b0-083862f08a67"
         }
     ],
@@ -41,6 +42,10 @@
     // Without it redirects still work and nothing is sent. Home URL, utm
     // hosts and the rest are in voidlink.config.ts.
     "vars": {
-        "POSTHOG_HOST": "https://us.i.posthog.com"
+        "HOME_URL": "https://taraxvoid.com/",
+        "POSTHOG_HOST": "https://us.i.posthog.com",
+        // Destinations on these hosts (or their subdomains) get default utm_
+        // tags, so the site's own analytics credits txv.sh.
+        "UTM_HOSTS": ["taraxvoid.com", "taraxvoid.net"]
     }
 }

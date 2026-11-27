@@ -144,3 +144,11 @@ a shell:
   taraxvoid/infra. The deploy log prints link counts, never destinations.
 - Report a security problem with a script privately; see
   [SECURITY.md](SECURITY.md).
+
+## License
+
+Code is [MIT](LICENSE). My content is excluded and all rights reserved: the
+`ABOUT` block in `src/pages.ts` and the `HOME_URL` and `UTM_HOSTS` values in
+`wrangler.jsonc`. It identifies a person, so replace it if you fork this. See
+[NOTICE](NOTICE), which is separate so `LICENSE` stays the unmodified MIT text
+that license scanners recognize.
