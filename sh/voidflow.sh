@@ -37,7 +37,7 @@ has() {
 main() {
     pkg=@taraxvoid/voidflow
     # renovate: datasource=npm depName=@taraxvoid/voidflow
-    version=1.5.0
+    version=1.6.4
     repo=taraxvoid/voidflow
     url=https://registry.npmjs.org/$pkg/-/voidflow-$version.tgz
 

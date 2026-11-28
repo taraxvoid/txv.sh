@@ -19,4 +19,4 @@ jobs:
             contents: read
             issues: write # the drift issue
             actions: read # environments
-        uses: taraxvoid/voidflow/.github/workflows/voidflow-drift.yml@6debbf253b3514375d712af47d1007546bd7b79a # v1.5.0
+        uses: taraxvoid/voidflow/.github/workflows/voidflow-drift.yml@e3568aa3fe4955c214c20f732a567d07fca6bff9 # v1.6.5

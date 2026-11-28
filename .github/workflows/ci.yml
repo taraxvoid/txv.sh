@@ -18,7 +18,7 @@ permissions:
 
 jobs:
     validate:
-        uses: taraxvoid/voidflow/.github/workflows/tool-ci.yml@6debbf253b3514375d712af47d1007546bd7b79a # v1.5.0
+        uses: taraxvoid/voidflow/.github/workflows/tool-ci.yml@e3568aa3fe4955c214c20f732a567d07fca6bff9 # v1.6.5
         permissions:
             contents: read
             pull-requests: read
@@ -54,7 +54,7 @@ jobs:
               with:
                   subject-path: sh/*.sh
 
-            - uses: taraxvoid/voidflow/actions/cloudflare-deploy@6debbf253b3514375d712af47d1007546bd7b79a # v1.5.0
+            - uses: taraxvoid/voidflow/actions/cloudflare-deploy@e3568aa3fe4955c214c20f732a567d07fca6bff9 # v1.6.5
               with:
                   env: prod
                   cloudflare-api-token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
